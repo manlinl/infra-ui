@@ -1,11 +1,11 @@
 import React from 'react';
-import Box from '@material-ui/core/Box';
+import Layout from './layout'
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <Box component="span" display="block">Hello World</Box>
+      <Layout></Layout>
     </div>
   );
 }
