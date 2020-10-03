@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -9,6 +9,15 @@ import BuildRoundedIcon from '@material-ui/icons/BuildRounded';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Collapse, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link, NavLink, NavLinkProps
+} from 'react-router-dom';
+
+import DeployManagerUI from './deploy_manager/deploy_manager'
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -46,15 +55,32 @@ export function Navigation() {
                         </ListItemIcon>
                         <ListItemText primary="Dashboard" />
                     </ListItem>
-                    <ListItem button className={classes.nested}>
+                    <ListItem button className={classes.nested} 
+                          component={forwardRef((props: NavLinkProps, ref: any) => <NavLink exact {...props} innerRef={ref} />)}
+                          to = "/deploy-manager"
+
+                    >
                         <ListItemIcon>
                             <BuildRoundedIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Deployment" />
+                        <ListItemText primary="Deploy Manager" />
                     </ListItem>
                 </List>
             </Collapse>
         </List>
     );
+}
+
+export function Pages() {
+    return (
+        <Switch>
+            <Route exact path="/">
+                Hello World!
+            </Route>
+            <Route path="/deploy-manager">
+                <DeployManagerUI/>
+            </Route>
+        </Switch>
+    )
 }
 

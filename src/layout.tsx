@@ -4,7 +4,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import { ChevronLeft, Menu } from '@material-ui/icons';
 import { AppBar, CssBaseline, Divider, Drawer, IconButton, Toolbar, Typography } from '@material-ui/core';
 import clsx from 'clsx';
-import { Navigation } from './navigation';
+import { Navigation, Pages } from './navigation';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link, NavLink
+} from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -99,6 +105,7 @@ export default function Layout() {
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
     return (
+        <Router>
         <div className={classes.root}>
             <CssBaseline />
             <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
@@ -134,7 +141,9 @@ export default function Layout() {
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
+                <Pages></Pages>
             </main>
         </div>
+        </Router>
     );
 }
